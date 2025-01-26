@@ -18,11 +18,27 @@ const axiosInstance = axios.create({
 });
 
 export const api = async <T = unknown>(method: string, endpoint: string = '', data?: T) => {
-  const response = await axiosInstance({
-    method,
-    url: endpoint,
-    data: method !== 'GET' ? data : undefined,
-    params: method === 'GET' ? data : undefined
-  });
-  return response.data;
+  try {
+    const response = await axiosInstance({
+      method,
+      url: endpoint,
+      data: method !== 'GET' ? data : undefined,
+      params: method === 'GET' ? data : undefined
+    });
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response?.data) {
+      const errorData = error.response.data;
+      throw {
+        success: false,
+        message: errorData.message || 'An error occurred while processing your request',
+        statusCode: error.response.status
+      };
+    }
+    throw {
+      success: false,
+      message: 'An unexpected error occurred',
+      statusCode: 500
+    };
+  }
 };

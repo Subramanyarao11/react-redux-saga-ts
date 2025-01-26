@@ -3,3 +3,4 @@ export const TODO_CREATE = 'TODO_CREATE';
 export const TODO_UPDATE = 'TODO_UPDATE';
 export const TODO_DELETE = 'TODO_DELETE';
 export const TODO_TOGGLE_STATUS = 'TODO_TOGGLE_STATUS';
+export const TODO_RESET_ERROR = 'TODO_RESET_ERROR';

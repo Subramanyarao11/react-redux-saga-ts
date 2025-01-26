@@ -1,12 +1,12 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { getAllTodos, createTodo, updateTodo, deleteTodo, toggleTodoStatus } from '../actions/todo';
-import { DeleteTodoResponse, GetTodosResponse, SingleTodoResponse } from '../actions/todo/types';
+import { DeleteTodoResponse, GetTodosResponse, SingleTodoResponse } from '../../types/todo';
 import {
   CreateTodoPayload,
   UpdateTodoPayload,
   ToggleTodoStatusPayload,
   TodoActionError
-} from '../actions/todo/payloadTypes';
+} from '../../types/payloadTypes';
 import { api } from '../../services/api';
 import type { AxiosError } from 'axios';
 import type { ApiErrorResponse } from '../../services/api';

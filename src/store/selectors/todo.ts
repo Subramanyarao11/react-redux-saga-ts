@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 import { RootState } from '../reducers';
-import { TodoState } from '../actions/todo/types';
+import { TodoState } from '../../types/todo';
 
 const getTodoState = (state: RootState): TodoState => state.todo;
 

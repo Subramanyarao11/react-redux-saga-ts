@@ -1,11 +1,7 @@
 import { produce } from 'immer';
 import { getAllTodos, createTodo, updateTodo, deleteTodo, toggleTodoStatus } from '../actions/todo';
-import { TodoState, Todo } from '../actions/todo/types';
-import {
-  TodoActionSuccess,
-  TodoActionError,
-  DeleteTodoSuccess
-} from '../actions/todo/payloadTypes';
+import { TodoState, Todo } from '../../types/todo';
+import { TodoActionSuccess, TodoActionError, DeleteTodoSuccess } from '../../types/payloadTypes';
 
 type TodoAction = {
   type: string;

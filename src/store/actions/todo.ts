@@ -6,7 +6,7 @@ import {
   TODO_UPDATE,
   TODO_DELETE,
   TODO_TOGGLE_STATUS
-} from './constants';
+} from '../constants/todo';
 
 export const getAllTodos = createRoutine(TODO_GET_ALL);
 export const createTodo = createRoutine(TODO_CREATE);

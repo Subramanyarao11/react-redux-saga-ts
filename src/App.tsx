@@ -1,7 +1,7 @@
-import { useState } from 'react'
+import { useState } from 'react';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -32,7 +32,7 @@ function App() {
         </div>
       </main>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

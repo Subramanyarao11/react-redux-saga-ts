@@ -31,7 +31,10 @@ export const api = async <T = unknown>(method: string, endpoint: string = '', da
       const errorData = error.response.data;
       throw {
         success: false,
-        message: errorData.message || 'An error occurred while processing your request',
+        message:
+          errorData?.errors[0]?.description ||
+          errorData.message ||
+          'An error occurred while processing your request',
         statusCode: error.response.status
       };
     }

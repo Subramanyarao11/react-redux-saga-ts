@@ -43,7 +43,7 @@ function* createTodoRequest(action: { type: string; payload: CreateTodoPayload }
   } catch (error: unknown) {
     const axiosError = error as AxiosError<ApiErrorResponse>;
     const errorPayload: TodoActionError = {
-      message: axiosError.response?.data?.message || 'Failed to create todo'
+      message: axiosError.message || 'Failed to create todo'
     };
     yield put(createTodo.failure(errorPayload));
   } finally {
@@ -64,7 +64,7 @@ function* updateTodoRequest(action: { type: string; payload: UpdateTodoPayload }
   } catch (error: unknown) {
     const axiosError = error as AxiosError<ApiErrorResponse>;
     const errorPayload: TodoActionError = {
-      message: axiosError.response?.data?.message || 'Failed to update todo'
+      message: axiosError.message || 'Failed to update todo'
     };
     yield put(updateTodo.failure(errorPayload));
   } finally {
@@ -84,7 +84,7 @@ function* deleteTodoRequest(action: { type: string; payload: string }) {
   } catch (error: unknown) {
     const axiosError = error as AxiosError<ApiErrorResponse>;
     const errorPayload: TodoActionError = {
-      message: axiosError.response?.data?.message || 'Failed to delete todo'
+      message: axiosError.message || 'Failed to delete todo'
     };
     yield put(deleteTodo.failure(errorPayload));
   } finally {
@@ -105,7 +105,7 @@ function* toggleTodoStatusRequest(action: { type: string; payload: ToggleTodoSta
   } catch (error: unknown) {
     const axiosError = error as AxiosError<ApiErrorResponse>;
     const errorPayload: TodoActionError = {
-      message: axiosError.response?.data?.message || 'Failed to toggle todo status'
+      message: axiosError.message || 'Failed to toggle todo status'
     };
     yield put(toggleTodoStatus.failure(errorPayload));
   } finally {

@@ -1,50 +1,164 @@
-# React + TypeScript + Vite
+# React Redux Saga TypeScript App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React application showcasing the implementation of Redux Saga with TypeScript, demonstrating best practices and patterns for state management in React applications.
 
-Currently, two official plugins are available:
+## Table of Contents
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Technology Stack](#technology-stack)
+- [Project Structure](#project-structure)
+- [Core Concepts](#core-concepts)
+- [Implementation Details](#implementation-details)
+- [State Management](#state-management)
+- [Type Safety](#type-safety)
+- [Suggestions for Improvement](#suggestions-for-improvement)
+- [API References](#api-references)
 
-## Expanding the ESLint configuration
+## Technology Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- React 18.3
+- Redux & Redux Saga
+- TypeScript
+- Vite
+- Tailwind CSS
+- ESLint & Prettier
 
-- Configure the top-level `parserOptions` property like this:
+## Project Structure
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname
-    }
-  }
-});
+```
+src/
+├── components/     # React components
+├── store/         # Redux store configuration
+│   ├── actions/   # Action creators
+│   ├── reducers/  # Redux reducers
+│   ├── sagas/     # Redux sagas
+│   └── selectors/ # Reselect selectors
+├── types/         # TypeScript interfaces
+└── services/      # API services
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Core Concepts
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react';
+### 1. Redux Saga Implementation
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules
-  }
-});
+The application uses Redux Saga for handling side effects. Key implementations include:
+
+- Centralized saga management in `rootSaga`
+- Type-safe action creators using `redux-saga-routines`
+- Error handling patterns in saga effects
+- Request/Success/Failure patterns for API calls
+
+### 2. Type Safety
+
+The codebase implements comprehensive TypeScript types:
+
+- Strict typing for state management
+- Interface definitions for API responses
+- Type-safe selectors using `createStructuredSelector`
+- Custom hooks with proper typing
+
+### 3. Component Architecture
+
+Components are structured following best practices:
+
+- Separation of concerns
+- Reusable components
+- Container/Presentational pattern
+
+## Implementation Details
+
+### State Management
+
+The application uses a well-structured Redux store:
+
+1. **Actions:**
+
+   - Uses `redux-saga-routines` for creating action creators
+   - Each action follows the pattern: TRIGGER → REQUEST → SUCCESS/FAILURE → FULFILL
+
+2. **Sagas:**
+
+   - Handles API calls and side effects
+   - Implements error handling and loading states
+   - Uses TypeScript for type-safe API responses
+   - Follows generator function patterns
+
+3. **Reducers:**
+
+   - Implements immutable state updates
+   - Handles loading states and errors
+   - Type-safe state management
+
+4. **Selectors:**
+   - Uses `createStructuredSelector` from `reselect` for efficient memoization
+   - Implements selector composition for complex state derivation
+
+### API Integration
+
+The application implements a clean API integration pattern:
+
+- Centralized API service
+- Type-safe API responses
+- Error handling middleware
+
+### Component Architecture
+
+1. **TodoForm:**
+
+   - Handles todo creation
+   - Form validation
+   - Loading state management
+
+2. **TodoList:**
+
+   - Manages todo items display
+   - Implements error handling
+   - Loading states
+
+3. **TodoItem:**
+   - Handles individual todo operations
+   - Implements edit/delete functionality
+   - Toggle completion status
+
+## Type Safety
+
+The application implements comprehensive type safety:
+
+```typescript
+export interface Todo {
+  _id: string;
+  title: string;
+  description: string;
+  isComplete: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface TodoState {
+  todos: Todo[];
+  isLoading: boolean;
+  error: string | null;
+}
 ```
+
+## Suggestions for Improvement
+
+- Implement retry mechanisms for failed API calls using `retry` effect
+- Create dedicated error handling sagas
+- Add circuit breaker pattern for API calls
+- Implement proper error recovery strategies
+- Add request cancellation using `race` effect
+- Implement proper cleanup with `cancel` effects
+
+## API References
+
+This project uses the Todo API service provided by [FreeAPI](https://api.freeapi.app), a free and open API platform that offers various endpoints for testing and development purposes. We specifically use their Todo API endpoints for this project.
+
+### API Endpoints Used
+
+- GET /api/v1/todos - Fetch all todos
+- POST /api/v1/todos - Create new todo
+- PATCH /api/v1/todos/:id - Update todo
+- DELETE /api/v1/todos/:id - Delete todo
+- PATCH /api/v1/todos/toggle/status/:id - Toggle todo status
+
+Visit [FreeAPI](https://freeapi.hashnode.space/freeapi-docs/freeapi) for more information about other available APIs.

@@ -26,14 +26,14 @@ React application showcasing the implementation of Redux Saga with TypeScript, d
 
 ```
 src/
-├── components/     # React components
+├── components/    # React components
 ├── store/         # Redux store configuration
 │   ├── actions/   # Action creators
 │   ├── reducers/  # Redux reducers
 │   ├── sagas/     # Redux sagas
 │   └── selectors/ # Reselect selectors
-├── types/         # TypeScript interfaces
-└── services/      # API services
+├── types/         # TypeScript interfaces / types
+└── services/      # Other services
 ```
 
 ## Core Concepts
@@ -143,7 +143,7 @@ export interface TodoState {
 ## Suggestions for Improvement
 
 - Implement retry mechanisms for failed API calls using `retry` effect
-- Create dedicated error handling sagas
+- Create dedicated error/loading handling sagas
 - Add circuit breaker pattern for API calls
 - Implement proper error recovery strategies
 - Add request cancellation using `race` effect
